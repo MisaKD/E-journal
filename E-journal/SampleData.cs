@@ -52,7 +52,7 @@ namespace E_journal
                     new Teacher
                     {
                         Name = "Полякова Ариана Максимовна",
-                        Discipline = "Международные отношения"
+                        Discipline = "Юриспруденция"
                     },
                     new Teacher
                     {
