@@ -6,21 +6,30 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using E_journal.Models.ViewModels;
+using E_journal.Services;
 
 namespace E_journal.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private IGroupService _groupService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IGroupService groupService)
         {
+            _groupService = groupService;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var groups = new GroupViewModel
+            {
+                GroupList = _groupService.Select()
+            };
+
+            return View(groups);
         }
 
         public IActionResult Privacy()

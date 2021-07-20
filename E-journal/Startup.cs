@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using E_journal.Services;
 
 namespace E_journal
 {
@@ -27,7 +28,7 @@ namespace E_journal
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<EjournalContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
-
+            services.AddTransient<IGroupService, GroupService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

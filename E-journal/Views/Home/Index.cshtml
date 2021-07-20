@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model E_journal.Models.ViewModels.GroupViewModel
+
+@{
+    ViewData["Title"] = "Главная страница";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Группы студентов</h1>
+    
+</div>
+<div class="row">
+
+    <table>
+        <thead>
+        <tr>
+            <th> № </th>
+            <th> Название </th>
+            <th> Куратор </th>
+            <th> Курс </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach (var group in Model.GroupList)
+        {
+            <tr>
+                <td>@group.Id</td>
+                <td>@group.Name</td>
+                <td>@group.Curator</td>
+                <td>@group.Course.CourseNumber</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+
 </div>
