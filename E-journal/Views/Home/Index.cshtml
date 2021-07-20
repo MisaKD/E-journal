@@ -10,20 +10,20 @@
 </div>
 <div class="row">
 
-    <table>
+    <table class="table">
         <thead>
         <tr>
-            <th> № </th>
-            <th> Название </th>
-            <th> Куратор </th>
-            <th> Курс </th>
+            <th scope="col">№ </th>
+            <th scope="col">Название </th>
+            <th scope="col">Куратор </th>
+            <th scope="col">Курс</th>
         </tr>
         </thead>
         <tbody>
 
         @foreach (var group in Model.GroupList)
         {
-            <tr>
+            <tr class="table-info">
                 <td>@group.Id</td>
                 <td>@group.Name</td>
                 <td>@group.Curator</td>
