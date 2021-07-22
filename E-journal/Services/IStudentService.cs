@@ -6,10 +6,8 @@ using E_journal.Models;
 
 namespace E_journal.Services
 {
-    public interface IGroupService
+    public interface IStudentService
     {
-        List<Group> Select();
-        Group SelectById(int Id);
-
+        List<Student> SelectByGroupId(int groupId);
     }
 }

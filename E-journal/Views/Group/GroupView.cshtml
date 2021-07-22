@@ -1,0 +1,32 @@
+﻿@model E_journal.Models.ViewModels.GroupViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+<h2>
+    Группа @Model.Name
+</h2>
+<div>
+    <p>Специализация: @Model.Specialization</p>
+    <p>Год: @Model.Year</p>
+    <p>Куратор: @Model.Curator</p>
+    <p>Курс: @Model.Course.CourseNumber</p>
+    <h4>Студенты:</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ФИО</th>
+                <th scope="col">Номер телефона</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var student in Model.Students)
+            {
+                <tr class="table-info">
+                    <td>@student.Name</td>
+                    <td>@student.PhoneNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

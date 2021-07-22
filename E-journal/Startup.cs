@@ -29,6 +29,7 @@ namespace E_journal
             services.AddDbContext<EjournalContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
             services.AddTransient<IGroupService, GroupService>();
+            services.AddTransient<IStudentService, StudentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

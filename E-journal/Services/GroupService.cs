@@ -19,5 +19,12 @@ namespace E_journal.Services
             var groupList = _context.Groups.ToList();
             return groupList;
         }
+
+        public Group SelectById(int Id)
+        {
+            var group = _context.Groups.Find(Id);
+            return group;
+        }
+
     }
 }
