@@ -30,6 +30,8 @@ namespace E_journal
             services.AddControllersWithViews();
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<ITeacherService, TeacherService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

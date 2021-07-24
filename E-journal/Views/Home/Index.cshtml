@@ -6,36 +6,61 @@
 
 <div class="text-center">
     <h1 class="display-4">Группы студентов</h1>
-    
+
+</div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end p-3">
+    <a href="@Url.Action("CreateGroup", "Group")" class="btn btn-outline-dark" id="AddGroup"><i class="bi bi-plus-circle"></i>   Добавить группу</a>
 </div>
 <div class="row">
 
     <table class="table">
         <thead>
-        <tr>
-            <th scope="col"># </th>
-            <th scope="col">Название </th>
-            <th scope="col">Специльность </th>
-            <th scope="col">Куратор </th>
-            <th scope="col">Год </th>
-            <th scope="col">Курс</th>
-        </tr>
+            <tr>
+                <th scope="col"># </th>
+                <th scope="col">Название </th>
+                <th scope="col">Специльность </th>
+                <th scope="col">Куратор </th>
+                <th scope="col">Год </th>
+                <th scope="col">Курс</th>
+            </tr>
         </thead>
         <tbody>
 
-        @foreach (var group in Model.GroupList)
-        {
-            <tr class="table-info">
-                <td>@group.Id</td>
-                <td>@group.Name</td>
-                <td>@group.Specialization</td>
-                <td>@group.Curator</td>
-                <td>@group.Year</td>
-                <td>@group.Course.CourseNumber</td>
-            </tr>
-        }
+            @foreach (var group in Model.GroupList)
+            {
+                <tr class="table-info">
+                    <td>@group.Id</td>
+                    <td>@group.Name</td>
+                    <td>@group.Specialization</td>
+                    <td>@group.Curator</td>
+                    <td>@group.Year</td>
+                    <td>@group.Course.CourseNumber</td>
+                </tr>
+            }
         </tbody>
     </table>
 
 
 </div>
+
+@*//Для модального окна*@
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("#AddGroup").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+}

@@ -26,5 +26,12 @@ namespace E_journal.Services
             return group;
         }
 
+        public void CreateGroup(Group model)
+        {
+            _context.Groups.Add(model);
+            _context.SaveChanges();
+            
+        }
+
     }
 }

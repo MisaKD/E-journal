@@ -1,0 +1,41 @@
+﻿@model E_journal.Models.ViewModels.GroupViewModel
+@{
+    ViewData["Title"] = "Создание группы";
+}
+<div class="container">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h6>Создание группы</h6>
+            <button class="close" data-dismiss="modal" area-hidden="true"><i class="bi bi-x-circle"></i></button>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label>Название группы</label>
+                    @Html.TextBoxFor(model => model.Name,new {@class="form-control"})
+                </div>
+                <div class="form-group">
+                    <label>Куратор</label>
+                    @Html.TextBoxFor(model =>model.Curator,new{@class="form-control",list="teachersList"})
+                    
+                </div>
+                @*<div class="form-group">
+                    <label>Продукция</label>
+                    @Html.DropDownListFor(model => model.ProductId, Model.ProductSelectList, new { @class = "form-control" })
+                </div>*@
+                
+            <div class="form-group">
+                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-check2">  Отправить</i></button>
+            </div>
+            }
+            <datalist id="teachersList">
+                @foreach (var teacher in Model.TeachersList)
+                {
+                    <option value="@teacher.Name">@teacher.Name</option>
+                }
+               
+            </datalist>
+        </div>
+    </div>
+</div>
