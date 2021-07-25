@@ -6,10 +6,13 @@
     Группа @Model.Name
 </h2>
 <div>
+    <p><a href="@Url.Action("EditGroup","Group",new{Id=Model.Id})" id="EditGroup"><i class="bi bi-pencil-square"></i> Редактировать</a></p>
     <p>Специализация: @Model.Specialization</p>
     <p>Год: @Model.Year</p>
     <p>Куратор: @Model.Curator</p>
     <p>Курс: @Model.Course.CourseNumber</p>
+    <p><a href="@Url.Action("CreateStudent","Student",new{GroupId=Model.Id})" id="CreateStudent"><i class="bi bi-person-plus-fill"></i> Создать студента</a></p>
+    
     <h4>Студенты:</h4>
     <table class="table">
         <thead>
@@ -23,10 +26,48 @@
             @foreach (var student in Model.StudentsList)
             {
                 <tr class="table-info">
-                    <td>@student.Name</td>
+                    <td><a href="@Url.Action("StudentView","Student",new{Id=student.Id})">@student.Name</a></td>
                     <td>@student.PhoneNumber</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+@*//Для модального окна*@
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("#EditGroup").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("#CreateStudent").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+
+}

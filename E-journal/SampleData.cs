@@ -15,19 +15,19 @@ namespace E_journal
                 context.Courses.AddRange(
                     new Course
                     {
-                        CourseNumber = "1"
+                        CourseNumber = "Первый"
                     },
                     new Course
                     {
-                        CourseNumber = "2"
+                        CourseNumber = "Второй"
                     },
                     new Course
                     {
-                        CourseNumber = "3"
+                        CourseNumber = "Третий"
                     },
                     new Course
                     {
-                        CourseNumber = "4"
+                        CourseNumber = "Четвертый"
                     });
                 context.SaveChanges();
             }

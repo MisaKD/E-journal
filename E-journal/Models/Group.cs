@@ -13,5 +13,6 @@ namespace E_journal.Models
         public int Year { get; set; }
         public string Curator { get; set; }
         public Course Course { get; set; }
+        public int CourseId { get; set; }
     }
 }

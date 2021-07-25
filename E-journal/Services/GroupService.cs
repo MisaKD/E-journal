@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using E_journal.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_journal.Services
 {
@@ -16,13 +17,13 @@ namespace E_journal.Services
         }
         public List<Group> Select()
         {
-            var groupList = _context.Groups.ToList();
+            var groupList = _context.Groups.Include(_=>_.Course).ToList();
             return groupList;
         }
 
         public Group SelectById(int Id)
         {
-            var group = _context.Groups.Find(Id);
+            var group = _context.Groups.Include(_ => _.Course).FirstOrDefault(_=>_.Id==Id);
             return group;
         }
 
@@ -30,8 +31,12 @@ namespace E_journal.Services
         {
             _context.Groups.Add(model);
             _context.SaveChanges();
-            
         }
 
+        public void EditGroup(Group model)
+        {
+            _context.Entry(model).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
     }
 }

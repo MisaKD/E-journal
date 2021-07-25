@@ -1,4 +1,5 @@
-﻿@model E_journal.Models.ViewModels.GroupViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Routing
+@model E_journal.Models.ViewModels.GroupViewModel
 
 @{
     ViewData["Title"] = "Главная страница";
@@ -30,7 +31,8 @@
             {
                 <tr class="table-info">
                     <td>@group.Id</td>
-                    <td>@group.Name</td>
+                    <td><a href="@Url.Action("GroupView","Group",new{Id=group.Id})">@group.Name</a></td>
+                    @*<td>@group.Name</td>*@
                     <td>@group.Specialization</td>
                     <td>@group.Curator</td>
                     <td>@group.Year</td>

@@ -1,0 +1,39 @@
+﻿@model StudentViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+<h2>
+    Студент @Model.Name
+</h2>
+<div>
+    <p><a href="@Url.Action("EditStudent","Student",new{Id=Model.Id})" id="EditStudent"><i class="bi bi-person-plus-fill"></i> Редактировать студента</a></p>
+    <p>ФИО: @Model.Name</p>
+    <p>Группа: @Model.Group.Name</p>
+    <p>Номер телефона: @Model.PhoneNumber</p>
+    <p>Возраст: @Model.Age</p>
+    <div>
+        <img src="/Student/Photo/@Model.PhotoName"/>
+    </div>
+
+</div>
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("#EditStudent").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+}

@@ -1,6 +1,13 @@
 ﻿@model E_journal.Models.ViewModels.GroupViewModel
 @{
     ViewData["Title"] = "Создание группы";
+    string formMethod = "CreateGroup";
+    int currentYear = (int)DateTime.Now.Year;
+    if (Model.Id != 0)
+    {
+        formMethod = "EditGroup";
+        currentYear = Model.Year;
+    }
 }
 <div class="container">
     <div class="modal-content">
@@ -9,32 +16,40 @@
             <button class="close" data-dismiss="modal" area-hidden="true"><i class="bi bi-x-circle"></i></button>
         </div>
         <div class="modal-body">
-            @using (Html.BeginForm("CreateGroup", "Group", FormMethod.Post))
+            @using (Html.BeginForm(formMethod, "Group", FormMethod.Post))
             {
                 <div class="form-group">
                     <label>Название группы</label>
-                    @Html.TextBoxFor(model => model.Name,new {@class="form-control"})
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     <label>Куратор</label>
-                    @Html.TextBoxFor(model =>model.Curator,new{@class="form-control",list="teachersList"})
-                    
+                    @Html.TextBoxFor(model => model.Curator, new { @class = "form-control", list = "teachersList" })
                 </div>
-                @*<div class="form-group">
-                    <label>Продукция</label>
-                    @Html.DropDownListFor(model => model.ProductId, Model.ProductSelectList, new { @class = "form-control" })
-                </div>*@
+                <div class="form-group">
+                    <label>Курс</label>
+                    @Html.DropDownListFor(model => model.CourseId, new SelectList(Model.CoursesList, "Id", "CourseNumber"), new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Специальность</label>
+                    @Html.TextBoxFor(model => model.Specialization, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Год</label>
+                    @Html.TextBoxFor(model => model.Year,currentYear.ToString(), new { @class = "form-control",type="number",min="2018",max= (int)DateTime.Now.Year })
+                </div>
                 
-            <div class="form-group">
-                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-check2">  Отправить</i></button>
-            </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-dark" type="submit"><i class="bi bi-check2">  Отправить</i></button>
+                </div>
+
             }
             <datalist id="teachersList">
                 @foreach (var teacher in Model.TeachersList)
                 {
                     <option value="@teacher.Name">@teacher.Name</option>
                 }
-               
+
             </datalist>
         </div>
     </div>

@@ -34,12 +34,39 @@ namespace E_journal.Controllers
             {
                 Id = group.Id,
                 Name = group.Name,
-                CourseId = group.Course.Id,
+                Course = group.Course,
                 Curator = group.Curator,
+                Specialization = group.Specialization,
+                Year = group.Year,
                 StudentsList = _studentService.SelectByGroupId(Id)
             };
             return View(model);
         }
+        [HttpGet]
+        public IActionResult EditGroup(int Id)
+        {
+            var group = _groupService.SelectById(Id);
+            var model = new GroupViewModel
+            {
+                Id = group.Id,
+                Name = group.Name,
+                Course = group.Course,
+                Curator = group.Curator,
+                Specialization = group.Specialization,
+                Year = group.Year,
+                TeachersList = _teacherService.Select(),
+                CoursesList = _courseService.Select()
+            };
+            return PartialView(_editForm, model);
+        }
+
+        [HttpPost]
+        public IActionResult EditGroup(Group model)
+        {
+            _groupService.EditGroup(model);
+            return RedirectToAction("GroupView",new{model.Id});
+        }
+
         [HttpGet]
         public IActionResult CreateGroup()
         {
@@ -54,6 +81,7 @@ namespace E_journal.Controllers
         [HttpPost]
         public IActionResult CreateGroup(Group model)
         {
+            _groupService.CreateGroup(model);
             return RedirectToAction("Index","Home");
         }
         
