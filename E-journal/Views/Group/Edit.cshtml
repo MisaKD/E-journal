@@ -5,6 +5,7 @@
     int currentYear = (int)DateTime.Now.Year;
     if (Model.Id != 0)
     {
+        ViewData["Title"] = "Редактирование группы";
         formMethod = "EditGroup";
         currentYear = Model.Year;
     }
@@ -12,7 +13,7 @@
 <div class="container">
     <div class="modal-content">
         <div class="modal-header">
-            <h6>Создание группы</h6>
+            <h6>@ViewData["Title"]</h6>
             <button class="close" data-dismiss="modal" area-hidden="true"><i class="bi bi-x-circle"></i></button>
         </div>
         <div class="modal-body">

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using E_journal.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_journal.Services
 {
-    public class TeacherService:ITeacherService
+    public class TeacherService : ITeacherService
     {
         public EjournalContext _context;
 
@@ -21,5 +22,22 @@ namespace E_journal.Services
             return teacherList;
         }
 
+        public Teacher SelectById(int Id)
+        {
+            var teacher = _context.Teachers.FirstOrDefault(_ => _.Id == Id);
+            return teacher;
+        }
+
+        public void CreateTeacher(Teacher model)
+        {
+            _context.Teachers.Add(model);
+            _context.SaveChanges();
+        }
+
+        public void EditTeacher(Teacher model)
+        {
+            _context.Entry(model).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
     }
 }

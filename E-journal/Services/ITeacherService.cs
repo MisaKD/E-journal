@@ -9,6 +9,10 @@ namespace E_journal.Services
     public interface ITeacherService
     {
         List<Teacher> Select();
-       
+        Teacher SelectById(int Id);
+        void CreateTeacher(Teacher model);
+        void EditTeacher(Teacher model);
+
+
     }
 }
