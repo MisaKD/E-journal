@@ -13,7 +13,6 @@ namespace E_journal.Models.ViewModels
         public string PhoneNumber { get; set; }
         public int Age { get; set; }
         public string PhotoName { get; set; }
-        public List<Student> StudentsList { get; set; }
         public int GroupId { get; set; }
 
     }
