@@ -49,13 +49,19 @@ namespace E_journal.Services
 
         public void EditStudent(Student model, IFormFile uploadedFile)
         {
-            string path = "/Student/Photo/" + uploadedFile.FileName;
-            using (var fileStream = new FileStream(EjEnvironment.WebRootPath + path, FileMode.Create))
+            if (uploadedFile!=null)
             {
-                uploadedFile.CopyTo(fileStream);
-            }
+                string path = "/Student/Photo/" + uploadedFile.FileName;
+                using (var fileStream = new FileStream(EjEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    uploadedFile.CopyTo(fileStream);
+                }
 
-            model.PhotoName = uploadedFile.FileName;
+                model.PhotoName = uploadedFile.FileName;
+            }
+            
+
+            
 
             _context.Entry(model).State = EntityState.Modified;
             _context.SaveChanges();
