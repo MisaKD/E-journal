@@ -72,7 +72,10 @@ namespace E_journal.Controllers
         [HttpPost]
         public IActionResult CreateStudent(Student model, IFormFile uploadedFile)
         {
-            _studentService.CreateStudent(model, uploadedFile);
+            if (ModelState.IsValid)
+            {
+                _studentService.CreateStudent(model, uploadedFile);
+            }
             return RedirectToAction("GroupView", "Group",new {Id=model.GroupId});
         }
     }

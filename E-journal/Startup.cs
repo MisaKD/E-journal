@@ -27,7 +27,10 @@ namespace E_journal
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<EjournalContext>(options => options.UseSqlServer(connection));
-            services.AddControllersWithViews();
+
+            services.AddMvc();
+            
+
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<ICourseService, CourseService>();

@@ -19,6 +19,7 @@
             @using (Html.BeginForm(formMethod, "Student", FormMethod.Post,new { enctype = "multipart/form-data" }))
             {
                 @Html.HiddenFor(model=>model.GroupId)
+                @Html.HiddenFor(model=>model.PhotoName)
                 <div class="form-group">
                     <label>ФИО</label>
                     @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
