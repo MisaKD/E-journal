@@ -30,7 +30,8 @@ namespace E_journal.Controllers
                 Group = student.Group,
                 PhoneNumber = student.PhoneNumber,
                 Age = student.Age,
-                PhotoName = student.PhotoName
+                PhotoName = student.PhotoName,
+                Email = student.Email
             };
             return View(model);
         }
@@ -45,7 +46,8 @@ namespace E_journal.Controllers
                 GroupId = student.GroupId,
                 PhoneNumber = student.PhoneNumber,
                 Age = student.Age,
-                PhotoName = student.PhotoName
+                PhotoName = student.PhotoName,
+                Email = student.Email
             };
             return PartialView(_editForm, model);
         }

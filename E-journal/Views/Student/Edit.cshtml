@@ -31,7 +31,10 @@
                     <label>Возраст</label>
                     @Html.TextBoxFor(model => model.Age, new { @class = "form-control", type = "number", min = "15", max = "99" })
                 </div>
-
+                <div class="form-group">
+                    <label>Адресс электронной почты:</label>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                </div>
                 <div class="form-group">
                     <label>Фото <i class="bi bi-person-square"></i></label>
                     <div class="input-group mb-3">
