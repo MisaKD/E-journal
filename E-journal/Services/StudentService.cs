@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using E_journal.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -43,8 +44,15 @@ namespace E_journal.Services
 
             model.PhotoName = uploadedFile.FileName;
 
-            _context.Students.Add(model);
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+               _context.Students.Add(model);
+               _context.SaveChanges();
+                
+            }
+                    
+
+            
         }
 
         public void EditStudent(Student model, IFormFile uploadedFile)
@@ -60,11 +68,10 @@ namespace E_journal.Services
                 model.PhotoName = uploadedFile.FileName;
             }
             
-
-            
-
             _context.Entry(model).State = EntityState.Modified;
             _context.SaveChanges();
         }
+
+
     }
 }
