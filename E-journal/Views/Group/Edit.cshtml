@@ -14,32 +14,37 @@
     <div class="modal-content">
         <div class="modal-header">
             <h6>@ViewData["Title"]</h6>
-            <button class="close" data-dismiss="modal" area-hidden="true"><i class="bi bi-x-circle"></i></button>
+            @*<button class="close" data-dismiss="modal" area-hidden="true"><i class="bi bi-x-circle"></i></button>*@
         </div>
         <div class="modal-body">
             @using (Html.BeginForm(formMethod, "Group", FormMethod.Post))
             {
                 <div class="form-group">
                     <label>Название группы</label>
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Name, "Не введено название группы", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label>Куратор</label>
-                    @Html.TextBoxFor(model => model.Curator, new { @class = "form-control", list = "teachersList" })
+                    @Html.TextBoxFor(model => model.Curator, new { @class = "form-control", list = "teachersList", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Curator, "Не введён куратор", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label>Курс</label>
                     @Html.DropDownListFor(model => model.CourseId, new SelectList(Model.CoursesList, "Id", "CourseNumber"), new { @class = "form-control" })
+
                 </div>
                 <div class="form-group">
                     <label>Специальность</label>
-                    @Html.TextBoxFor(model => model.Specialization, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Specialization, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Specialization, "Не введена специальность", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label>Год</label>
-                    @Html.TextBoxFor(model => model.Year,currentYear.ToString(), new { @class = "form-control",type="number",min="2018",max= (int)DateTime.Now.Year })
+                    @Html.TextBoxFor(model => model.Year, currentYear.ToString(), new { @class = "form-control", type = "number", min = "2018", max = (int)DateTime.Now.Year, required = "required" })
+                    @Html.ValidationMessageFor(model => model.Year, "Не введён год", new { @class = "text-danger" })
                 </div>
-                
+
                 <div class="form-group">
                     <button class="btn btn-outline-dark" type="submit"><i class="bi bi-check2">  Отправить</i></button>
                 </div>

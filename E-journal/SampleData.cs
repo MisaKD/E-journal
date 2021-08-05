@@ -1,8 +1,5 @@
 ﻿using E_journal.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace E_journal
 {
@@ -37,7 +34,7 @@ namespace E_journal
                     new Teacher
                     {
                         Name = "Назаров Савва Дмитриевич",
-                        Discipline= "Международные отношения"
+                        Discipline = "Международные отношения"
                     },
                     new Teacher
                     {

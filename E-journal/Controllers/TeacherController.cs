@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using E_journal.Models;
+﻿using E_journal.Models;
 using E_journal.Models.ViewModels;
 using E_journal.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_journal.Controllers
 {
-    public class TeacherController:Controller
+    public class TeacherController : Controller
 
     {
         private ITeacherService _teacherService;
@@ -38,13 +34,16 @@ namespace E_journal.Controllers
                 Name = teacher.Name,
                 Discipline = teacher.Discipline
             };
-            return PartialView(_editForm, model);
+            return View(_editForm, model);
         }
 
         [HttpPost]
         public IActionResult EditTeacher(Teacher model)
         {
-            _teacherService.EditTeacher(model);
+            if (ModelState.IsValid)
+            {
+                _teacherService.EditTeacher(model);
+            }
             return RedirectToAction("TeacherList");
         }
 
@@ -52,13 +51,17 @@ namespace E_journal.Controllers
         public IActionResult CreateTeacher()
         {
             var model = new TeacherViewModel();
-            return PartialView(_editForm,model);
+            return View(_editForm, model);
         }
 
         [HttpPost]
         public IActionResult CreateTeacher(Teacher model)
         {
-            _teacherService.CreateTeacher(model);
+            if (ModelState.IsValid)
+            {
+                _teacherService.CreateTeacher(model);
+            }
+
             return RedirectToAction("TeacherList");
         }
     }

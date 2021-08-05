@@ -32,7 +32,6 @@
                 <tr class="table-info">
                     <td>@group.Id</td>
                     <td><a href="@Url.Action("GroupView","Group",new{Id=group.Id})">@group.Name</a></td>
-                    @*<td>@group.Name</td>*@
                     <td>@group.Specialization</td>
                     <td>@group.Curator</td>
                     <td>@group.Year</td>
@@ -46,7 +45,7 @@
 </div>
 
 @*//Для модального окна*@
-<div id="modDialog" class="modal fade">
+@*<div id="modDialog" class="modal fade">
     <div id="dialogContent" class="modal-dialog"></div>
 </div>
 @section scripts
@@ -65,4 +64,4 @@
             });
         })
     </script>
-}
+}*@

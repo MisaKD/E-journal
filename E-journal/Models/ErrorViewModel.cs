@@ -1,5 +1,3 @@
-using System;
-
 namespace E_journal.Models
 {
     public class ErrorViewModel

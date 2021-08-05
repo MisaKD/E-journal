@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace E_journal.Models
 {
     public class Student
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Не указано имя")]
         public string Name { get; set; }
         public Group Group { get; set; }
-        public int GroupId { get; set; }        
+        public int GroupId { get; set; }
+        [Required(ErrorMessage = "Не указан номер телефона")]
         public string PhoneNumber { get; set; }
+        [Required(ErrorMessage = "Не указан возраст")]
         public int Age { get; set; }
         public string PhotoName { get; set; }
-        [Required, RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Некорректный адрес")]
+        [Required(ErrorMessage = "Не указан адрес электронной почты")]
+        [EmailAddress]
         public string Email { get; set; }
     }
 }

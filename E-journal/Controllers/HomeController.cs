@@ -1,13 +1,9 @@
 ﻿using E_journal.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using E_journal.Models.ViewModels;
 using E_journal.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace E_journal.Controllers
 {
@@ -16,7 +12,7 @@ namespace E_journal.Controllers
         private readonly ILogger<HomeController> _logger;
         private IGroupService _groupService;
 
-        public HomeController(ILogger<HomeController> logger,IGroupService groupService)
+        public HomeController(ILogger<HomeController> logger, IGroupService groupService)
         {
             _groupService = groupService;
             _logger = logger;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using E_journal.Models;
+﻿using E_journal.Models;
 using E_journal.Models.ViewModels;
 using E_journal.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +11,7 @@ namespace E_journal.Controllers
         private IStudentService _studentService;
         private ICourseService _courseService;
         private ITeacherService _teacherService;
-        
+
         private string _editForm = "~/Views/Group/Edit.cshtml";
 
         public GroupController(IGroupService groupService, IStudentService studentService, ITeacherService teacherService, ICourseService courseService)
@@ -23,7 +19,7 @@ namespace E_journal.Controllers
             _groupService = groupService;
             _studentService = studentService;
             _teacherService = teacherService;
-            _courseService = courseService;
+            _courseService = courseService; 
         }
 
 
@@ -57,14 +53,18 @@ namespace E_journal.Controllers
                 TeachersList = _teacherService.Select(),
                 CoursesList = _courseService.Select()
             };
-            return PartialView(_editForm, model);
+            return View(_editForm, model);
         }
 
         [HttpPost]
         public IActionResult EditGroup(Group model)
         {
-            _groupService.EditGroup(model);
-            return RedirectToAction("GroupView",new{model.Id});
+            if (ModelState.IsValid)
+            {
+                _groupService.EditGroup(model);
+            }
+
+            return RedirectToAction("GroupView", new { model.Id });
         }
 
         [HttpGet]
@@ -75,16 +75,20 @@ namespace E_journal.Controllers
                 TeachersList = _teacherService.Select(),
                 CoursesList = _courseService.Select()
             };
-            return PartialView(_editForm,model);
+            return View(_editForm, model);
         }
 
         [HttpPost]
         public IActionResult CreateGroup(Group model)
         {
-            _groupService.CreateGroup(model);
-            return RedirectToAction("Index","Home");
+            if (ModelState.IsValid)
+            {
+                _groupService.CreateGroup(model);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
-        
+
     }
 
 }

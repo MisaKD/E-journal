@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using E_journal.Models;
+﻿using E_journal.Models;
 using E_journal.Models.ViewModels;
 using E_journal.Services;
 using Microsoft.AspNetCore.Http;
@@ -10,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_journal.Controllers
 {
-    public class StudentController:Controller
-    
+    public class StudentController : Controller
+
     {
         private string _editForm = "~/Views/Student/Edit.cshtml";
         private IStudentService _studentService;
         public StudentController(IStudentService studentService)
         {
-            _studentService = studentService;            
+            _studentService = studentService;
         }
         [HttpGet]
         public IActionResult StudentView(int Id)
@@ -49,13 +45,17 @@ namespace E_journal.Controllers
                 PhotoName = student.PhotoName,
                 Email = student.Email
             };
-            return PartialView(_editForm, model);
+            return View(_editForm, model);
         }
 
         [HttpPost]
         public IActionResult EditStudent(Student model, IFormFile uploadedFile)
         {
-            _studentService.EditStudent(model,uploadedFile);
+            if (ModelState.IsValid)
+            {
+                _studentService.EditStudent(model, uploadedFile);
+            }
+            
             return RedirectToAction("StudentView", new { model.Id });
         }
 
@@ -64,9 +64,9 @@ namespace E_journal.Controllers
         {
             var model = new StudentViewModel()
             {
-               GroupId = GroupId
+                GroupId = GroupId
             };
-            return PartialView(_editForm,model);
+            return View(_editForm, model);
         }
 
         [HttpPost]
@@ -76,7 +76,7 @@ namespace E_journal.Controllers
             {
                 _studentService.CreateStudent(model, uploadedFile);
             }
-            return RedirectToAction("GroupView", "Group",new {Id=model.GroupId});
+            return RedirectToAction("GroupView", "Group", new { Id = model.GroupId });
         }
     }
 
