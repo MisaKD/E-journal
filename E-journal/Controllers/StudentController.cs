@@ -10,6 +10,7 @@ namespace E_journal.Controllers
 
     {
         private string _editForm = "~/Views/Student/Edit.cshtml";
+        private string _formErrorView = "~/Views/Home/FormError.cshtml";
         private IStudentService _studentService;
         public StudentController(IStudentService studentService)
         {
@@ -54,9 +55,10 @@ namespace E_journal.Controllers
             if (ModelState.IsValid)
             {
                 _studentService.EditStudent(model, uploadedFile);
+                return RedirectToAction("StudentView", new { model.Id });
             }
-            
-            return RedirectToAction("StudentView", new { model.Id });
+            return View(_formErrorView);
+
         }
 
         [HttpGet]
@@ -75,8 +77,11 @@ namespace E_journal.Controllers
             if (ModelState.IsValid)
             {
                 _studentService.CreateStudent(model, uploadedFile);
+                return RedirectToAction("GroupView", "Group", new { Id = model.GroupId });
             }
-            return RedirectToAction("GroupView", "Group", new { Id = model.GroupId });
+
+
+            return View(_formErrorView);
         }
     }
 

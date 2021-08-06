@@ -10,6 +10,7 @@ namespace E_journal.Controllers
     {
         private ITeacherService _teacherService;
         private string _editForm = "~/Views/Teacher/Edit.cshtml";
+        private string _formErrorView = "~/Views/Home/FormError.cshtml";
 
         public TeacherController(ITeacherService teacherService)
         {
@@ -43,8 +44,9 @@ namespace E_journal.Controllers
             if (ModelState.IsValid)
             {
                 _teacherService.EditTeacher(model);
+                return RedirectToAction("TeacherList");
             }
-            return RedirectToAction("TeacherList");
+            return View(_formErrorView);
         }
 
         [HttpGet]
@@ -60,9 +62,9 @@ namespace E_journal.Controllers
             if (ModelState.IsValid)
             {
                 _teacherService.CreateTeacher(model);
+                return RedirectToAction("TeacherList");
             }
-
-            return RedirectToAction("TeacherList");
+            return View(_formErrorView);
         }
     }
 }

@@ -13,13 +13,14 @@ namespace E_journal.Controllers
         private ITeacherService _teacherService;
 
         private string _editForm = "~/Views/Group/Edit.cshtml";
+        private string _formErrorView = "~/Views/Home/FormError.cshtml";
 
         public GroupController(IGroupService groupService, IStudentService studentService, ITeacherService teacherService, ICourseService courseService)
         {
             _groupService = groupService;
             _studentService = studentService;
             _teacherService = teacherService;
-            _courseService = courseService; 
+            _courseService = courseService;
         }
 
 
@@ -62,9 +63,10 @@ namespace E_journal.Controllers
             if (ModelState.IsValid)
             {
                 _groupService.EditGroup(model);
+                return RedirectToAction("GroupView", new { model.Id });
             }
 
-            return RedirectToAction("GroupView", new { model.Id });
+            return View(_formErrorView);
         }
 
         [HttpGet]
@@ -84,9 +86,10 @@ namespace E_journal.Controllers
             if (ModelState.IsValid)
             {
                 _groupService.CreateGroup(model);
+                return RedirectToAction("Index", "Home");
             }
+            return View(_formErrorView);
 
-            return RedirectToAction("Index", "Home");
         }
 
     }
