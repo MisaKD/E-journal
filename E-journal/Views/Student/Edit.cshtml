@@ -23,24 +23,24 @@
                 @Html.HiddenFor(model => model.GroupId)
                 @Html.HiddenFor(model => model.PhotoName)
                 @Html.ValidationSummary(true)
-            <div class="form-group">
-                <label>ФИО</label>
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })
-                @Html.ValidationMessageFor(model => model.Name, "Не введено ФИО", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                <label>Номер телефона</label>
-                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", required = "required" })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "Не введён номер телефона", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                <label>Возраст</label>
-                @Html.TextBoxFor(model => model.Age, new { @class = "form-control", type = "number", min = "15", max = "99" })
-                @Html.ValidationMessageFor(model => model.Age, "Не введён возраст", new { @class = "text-danger" })
-            </div>
+                <div class="form-group">
+                    <label>ФИО</label>
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Name, "Не введено ФИО", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label>Номер телефона</label>
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", required = "required",id="phone" })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "Не введён номер телефона", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label>Возраст</label>
+                    @Html.TextBoxFor(model => model.Age, new { @class = "form-control", type = "number", min = "15", max = "99" })
+                    @Html.ValidationMessageFor(model => model.Age, "Не введён возраст", new { @class = "text-danger" })
+                </div>
                 <div class="form-group">
                     <label>Адресс электронной почты:</label>
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", required = "required" })
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", required = "required",id="email" })
                     @Html.ValidationMessageFor(model => model.Email, "Не введён адрес электронной почты", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
@@ -59,3 +59,22 @@
         </div>
     </div>
 </div>
+
+
+ @section Scripts
+{
+<script type="text/javascript">
+    $(document).ready(function($) {
+        $('#phone').inputmask("+373(999)9-99-99");
+        $('#email').inputmask({
+            mask: "*{3,20}@@*{3,20}.*{2,7}",
+            definitions: {
+                '*': {
+                    validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+                    casing: "lower"
+                }
+            }
+        });
+    });
+</script>
+}
