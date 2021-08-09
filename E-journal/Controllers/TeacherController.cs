@@ -39,14 +39,15 @@ namespace E_journal.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditTeacher(Teacher model)
+        public IActionResult EditTeacher(TeacherViewModel model)
         {
             if (ModelState.IsValid)
             {
                 _teacherService.EditTeacher(model);
-                return RedirectToAction("TeacherList");
+                
             }
-            return View(_formErrorView);
+            //return View(_formErrorView);
+            return RedirectToAction("TeacherList");
         }
 
         [HttpGet]
@@ -57,14 +58,15 @@ namespace E_journal.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTeacher(Teacher model)
+        public IActionResult CreateTeacher(TeacherViewModel model)
         {
             if (ModelState.IsValid)
             {
                 _teacherService.CreateTeacher(model);
-                return RedirectToAction("TeacherList");
+                
             }
-            return View(_formErrorView);
+            //return View(_formErrorView);
+            return RedirectToAction("TeacherList");
         }
     }
 }
