@@ -1,4 +1,5 @@
 ﻿using E_journal.Models;
+using E_journal.Models.ViewModels;
 using System.Collections.Generic;
 
 namespace E_journal.Services
@@ -7,8 +8,8 @@ namespace E_journal.Services
     {
         List<Group> Select();
         Group SelectById(int Id);
-        void CreateGroup(Group model);
-        void EditGroup(Group model);
+        void CreateGroup(GroupViewModel model);
+        void EditGroup(GroupViewModel model);
 
     }
 }

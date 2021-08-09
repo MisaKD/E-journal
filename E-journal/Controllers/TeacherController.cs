@@ -44,10 +44,10 @@ namespace E_journal.Controllers
             if (ModelState.IsValid)
             {
                 _teacherService.EditTeacher(model);
-                
+                return RedirectToAction("TeacherList");
             }
-            //return View(_formErrorView);
-            return RedirectToAction("TeacherList");
+            return View(_formErrorView);
+
         }
 
         [HttpGet]
@@ -63,10 +63,10 @@ namespace E_journal.Controllers
             if (ModelState.IsValid)
             {
                 _teacherService.CreateTeacher(model);
-                
+                return RedirectToAction("TeacherList");
             }
-            //return View(_formErrorView);
-            return RedirectToAction("TeacherList");
+            return View(_formErrorView);
+
         }
     }
 }

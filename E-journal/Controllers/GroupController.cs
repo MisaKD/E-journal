@@ -58,7 +58,7 @@ namespace E_journal.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditGroup(Group model)
+        public IActionResult EditGroup(GroupViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace E_journal.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateGroup(Group model)
+        public IActionResult CreateGroup(GroupViewModel model)
         {
             if (ModelState.IsValid)
             {

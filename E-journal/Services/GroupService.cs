@@ -1,4 +1,5 @@
 ﻿using E_journal.Models;
+using E_journal.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,15 +26,34 @@ namespace E_journal.Services
             return group;
         }
 
-        public void CreateGroup(Group model)
+        public void CreateGroup(GroupViewModel model)
         {
-            _context.Groups.Add(model);
+            var domainModel = new Group
+            {
+               Name=model.Name,
+               Specialization=model.Specialization,
+               Year=model.Year,
+               Curator=model.Curator,
+               Course=model.Course,
+               CourseId=model.CourseId
+            };
+            _context.Groups.Add(domainModel);
             _context.SaveChanges();
         }
 
-        public void EditGroup(Group model)
+        public void EditGroup(GroupViewModel model)
         {
-            _context.Entry(model).State = EntityState.Modified;
+            var domainModel = new Group
+            {
+                Id=model.Id,
+                Name = model.Name,
+                Specialization = model.Specialization,
+                Year = model.Year,
+                Curator = model.Curator,
+                Course = model.Course,
+                CourseId = model.CourseId
+            };
+            _context.Entry(domainModel).State = EntityState.Modified;
             _context.SaveChanges();
         }
     }

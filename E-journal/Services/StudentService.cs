@@ -1,4 +1,5 @@
 ﻿using E_journal.Models;
+using E_journal.Models.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -31,8 +32,9 @@ namespace E_journal.Services
             return studentList;
 
         }
-        public void CreateStudent(Student model, IFormFile uploadedFile)
+        public void CreateStudent(StudentViewModel model, IFormFile uploadedFile)
         {
+            
             if (uploadedFile != null)
             {
                 string path = "/Student/Photo/" + uploadedFile.FileName;
@@ -43,13 +45,22 @@ namespace E_journal.Services
 
                 model.PhotoName = uploadedFile.FileName;
             }
-
-            _context.Students.Add(model);
+            var domainModel = new Student
+            {
+                Name = model.Name,
+                Group = model.Group,
+                GroupId = model.GroupId,
+                PhoneNumber = model.PhoneNumber,
+                Age = model.Age,
+                PhotoName = model.PhotoName,
+                Email = model.Email
+            };
+            _context.Students.Add(domainModel);
             _context.SaveChanges();
 
         }
 
-        public void EditStudent(Student model, IFormFile uploadedFile)
+        public void EditStudent(StudentViewModel model, IFormFile uploadedFile)
         {
             if (uploadedFile != null)
             {
@@ -61,8 +72,18 @@ namespace E_journal.Services
 
                 model.PhotoName = uploadedFile.FileName;
             }
-
-            _context.Entry(model).State = EntityState.Modified;
+            var domainModel = new Student
+            {
+                Id=model.Id,
+                Name = model.Name,
+                Group = model.Group,
+                GroupId = model.GroupId,
+                PhoneNumber = model.PhoneNumber,
+                Age = model.Age,
+                PhotoName = model.PhotoName,
+                Email = model.Email
+            };
+            _context.Entry(domainModel).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
