@@ -8,8 +8,8 @@ namespace E_journal.Services
     {
         List<Teacher> Select();
         Teacher SelectById(int Id);
-        void CreateTeacher(TeacherViewModel model);
-        void EditTeacher(TeacherViewModel model);
+        void CreateTeacher(Teacher model);
+        void EditTeacher(Teacher model);
 
 
     }

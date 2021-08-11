@@ -54,7 +54,19 @@ namespace E_journal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _studentService.EditStudent(model, uploadedFile);
+                var student = new Student
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Group = model.Group,
+                    GroupId = model.GroupId,
+                    PhoneNumber = model.PhoneNumber,
+                    Age = model.Age,
+                    PhotoName = model.PhotoName,
+                    Email = model.Email
+                };
+
+                _studentService.EditStudent(student, uploadedFile);
                 return RedirectToAction("StudentView", new { model.Id });
             }
             return View(_formErrorView);
@@ -76,7 +88,18 @@ namespace E_journal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _studentService.CreateStudent(model, uploadedFile);
+                var student = new Student
+                {
+                    Name = model.Name,
+                    Group = model.Group,
+                    GroupId = model.GroupId,
+                    PhoneNumber = model.PhoneNumber,
+                    Age = model.Age,
+                    PhotoName = model.PhotoName,
+                    Email = model.Email
+                };
+
+                _studentService.CreateStudent(student, uploadedFile);
                 return RedirectToAction("GroupView", "Group", new { Id = model.GroupId });
             }
 

@@ -9,8 +9,8 @@ namespace E_journal.Services
     {
         List<Student> SelectByGroupId(int groupId);
         Student SelectById(int Id);
-        void CreateStudent(StudentViewModel model, IFormFile uploadedFile);
-        void EditStudent(StudentViewModel model, IFormFile uploadedFile);
+        void CreateStudent(Student model, IFormFile uploadedFile);
+        void EditStudent(Student model, IFormFile uploadedFile);
 
     }
 }

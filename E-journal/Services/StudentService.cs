@@ -32,7 +32,7 @@ namespace E_journal.Services
             return studentList;
 
         }
-        public void CreateStudent(StudentViewModel model, IFormFile uploadedFile)
+        public void CreateStudent(Student model, IFormFile uploadedFile)
         {
             
             if (uploadedFile != null)
@@ -45,22 +45,13 @@ namespace E_journal.Services
 
                 model.PhotoName = uploadedFile.FileName;
             }
-            var domainModel = new Student
-            {
-                Name = model.Name,
-                Group = model.Group,
-                GroupId = model.GroupId,
-                PhoneNumber = model.PhoneNumber,
-                Age = model.Age,
-                PhotoName = model.PhotoName,
-                Email = model.Email
-            };
-            _context.Students.Add(domainModel);
+            
+            _context.Students.Add(model);
             _context.SaveChanges();
 
         }
 
-        public void EditStudent(StudentViewModel model, IFormFile uploadedFile)
+        public void EditStudent(Student model, IFormFile uploadedFile)
         {
             if (uploadedFile != null)
             {
@@ -72,18 +63,8 @@ namespace E_journal.Services
 
                 model.PhotoName = uploadedFile.FileName;
             }
-            var domainModel = new Student
-            {
-                Id=model.Id,
-                Name = model.Name,
-                Group = model.Group,
-                GroupId = model.GroupId,
-                PhoneNumber = model.PhoneNumber,
-                Age = model.Age,
-                PhotoName = model.PhotoName,
-                Email = model.Email
-            };
-            _context.Entry(domainModel).State = EntityState.Modified;
+            
+            _context.Entry(model).State = EntityState.Modified;
             _context.SaveChanges();
         }
 

@@ -8,8 +8,8 @@ namespace E_journal.Services
     {
         List<Group> Select();
         Group SelectById(int Id);
-        void CreateGroup(GroupViewModel model);
-        void EditGroup(GroupViewModel model);
+        void CreateGroup(Group model);
+        void EditGroup(Group model);
 
     }
 }

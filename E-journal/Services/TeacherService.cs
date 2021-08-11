@@ -27,26 +27,16 @@ namespace E_journal.Services
             return teacher;
         }
 
-        public void CreateTeacher(TeacherViewModel model)
+        public void CreateTeacher(Teacher model)
         {
-            var domainModel = new Teacher
-            {
-                Name = model.Name,
-                Discipline=model.Discipline
-            };
-            _context.Teachers.Add(domainModel);
+           
+            _context.Teachers.Add(model);
             _context.SaveChanges();
         }
 
-        public void EditTeacher(TeacherViewModel model)
+        public void EditTeacher(Teacher model)
         {
-            var domainModel = new Teacher
-            {
-                Id=model.Id,
-                Name = model.Name,
-                Discipline = model.Discipline
-            };
-            _context.Entry(domainModel).State = EntityState.Modified;
+            _context.Entry(model).State = EntityState.Modified;
             _context.SaveChanges();
         }
     }

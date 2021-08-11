@@ -26,34 +26,17 @@ namespace E_journal.Services
             return group;
         }
 
-        public void CreateGroup(GroupViewModel model)
+        public void CreateGroup(Group model)
         {
-            var domainModel = new Group
-            {
-               Name=model.Name,
-               Specialization=model.Specialization,
-               Year=model.Year,
-               Curator=model.Curator,
-               Course=model.Course,
-               CourseId=model.CourseId
-            };
-            _context.Groups.Add(domainModel);
+            
+            _context.Groups.Add(model);
             _context.SaveChanges();
         }
 
-        public void EditGroup(GroupViewModel model)
+        public void EditGroup(Group model)
         {
-            var domainModel = new Group
-            {
-                Id=model.Id,
-                Name = model.Name,
-                Specialization = model.Specialization,
-                Year = model.Year,
-                Curator = model.Curator,
-                Course = model.Course,
-                CourseId = model.CourseId
-            };
-            _context.Entry(domainModel).State = EntityState.Modified;
+            
+            _context.Entry(model).State = EntityState.Modified;
             _context.SaveChanges();
         }
     }

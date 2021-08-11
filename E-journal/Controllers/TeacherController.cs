@@ -43,7 +43,14 @@ namespace E_journal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _teacherService.EditTeacher(model);
+                var teacher = new Teacher
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Discipline = model.Discipline
+                };
+
+                _teacherService.EditTeacher(teacher);
                 return RedirectToAction("TeacherList");
             }
             return View(_formErrorView);
@@ -62,7 +69,13 @@ namespace E_journal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _teacherService.CreateTeacher(model);
+                var teacher = new Teacher
+                {
+                    Name = model.Name,
+                    Discipline = model.Discipline
+                };
+
+                _teacherService.CreateTeacher(teacher);
                 return RedirectToAction("TeacherList");
             }
             return View(_formErrorView);

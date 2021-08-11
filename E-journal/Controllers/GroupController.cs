@@ -62,7 +62,18 @@ namespace E_journal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _groupService.EditGroup(model);
+                var group = new Group
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Specialization = model.Specialization,
+                    Year = model.Year,
+                    Curator = model.Curator,
+                    Course = model.Course,
+                    CourseId = model.CourseId
+                };
+
+                _groupService.EditGroup(group);
                 return RedirectToAction("GroupView", new { model.Id });
             }
 
@@ -85,7 +96,17 @@ namespace E_journal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _groupService.CreateGroup(model);
+                var group = new Group
+                {
+                    Name = model.Name,
+                    Specialization = model.Specialization,
+                    Year = model.Year,
+                    Curator = model.Curator,
+                    Course = model.Course,
+                    CourseId = model.CourseId
+                };
+
+                _groupService.CreateGroup(group);
                 return RedirectToAction("Index", "Home");
             }
             return View(_formErrorView);
